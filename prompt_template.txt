@@ -18,4 +18,4 @@ outdir = './tmp'
 prefix = 'test'
 restart_mode = 'from_scratch'
 
-Write a scf calculation using mixing_beta = 0.6 for the given geometry.
+<<INSTRUCTION>>
