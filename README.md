@@ -134,3 +134,7 @@ After training, a sample `ppo_kg_rewards.csv` might look like:
 ---
 
 Let me know if you’d like a Markdown version of this README saved to file.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
