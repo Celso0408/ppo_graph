@@ -74,6 +74,21 @@ The ground truth QE input file used to compute rewards. Your model is trained to
 
 Utility script to extract relationships from markdown, YAML, or JSON technical documentation using GPT-based summarization and parsing.
 
+### Required Packages
+
+The project uses the following Python libraries:
+
+- `openai`
+- `torch`
+- `pandas`
+- `tqdm`
+- `python-dotenv`
+- `bs4`
+- `html2text`
+- `pyyaml`
+
+These were installed when `ppo_kg_rewards.csv` was generated, though exact versions were not recorded.
+
 ---
 
 ## 🚀 How to Run
@@ -81,7 +96,7 @@ Utility script to extract relationships from markdown, YAML, or JSON technical d
 1. **Install dependencies** (via Conda or Pip):
 
    ```bash
-   pip install openai torch pandas tqdm python-dotenv
+   pip install openai torch pandas tqdm python-dotenv bs4 html2text pyyaml
    ```
 
 2. **Set up your API key** in a `.env` file:
@@ -90,7 +105,7 @@ Utility script to extract relationships from markdown, YAML, or JSON technical d
    OPENAI_API_KEY=sk-...
    ```
 
-3. **Start training**:
+3. **Start training** (creates `ppo_kg_rewards.csv`):
 
    ```bash
    python ppo_training_loop.py
