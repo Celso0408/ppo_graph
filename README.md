@@ -148,6 +148,22 @@ After training, a sample `ppo_kg_rewards.csv` might look like:
 
 ---
 
+## 🔄 Convert HTML docs to Markdown
+
+The repository includes a small helper script for converting HTML
+documentation to Markdown. By default it reads HTML files from the
+`html2markdown/` directory and writes the converted files to
+`markdown_files/`.
+
+```bash
+python html2markdown/html_to_md.py --source path/to/html --dest path/to/output
+```
+
+Both `--source` and `--dest` are optional. If omitted the defaults are the
+project's `html2markdown` and `markdown_files` folders respectively.
+
+---
+
 Let me know if you’d like a Markdown version of this README saved to file.
 
 ## License

@@ -1,10 +1,14 @@
-import os
+import argparse
 from pathlib import Path
 from bs4 import BeautifulSoup
 import html2text
 
-SOURCE_DIR = Path("/home/celso/GENIUS/smart_gk/my_grath/html2markdown")
-DEST_DIR = Path("/home/celso/GENIUS/smart_gk/my_grath/markdown_files/")
+# Determine project root two levels above this file
+REPO_ROOT = Path(__file__).resolve().parents[1]
+
+# Default directories relative to the repository
+DEFAULT_SOURCE = REPO_ROOT / "html2markdown"
+DEFAULT_DEST = REPO_ROOT / "markdown_files"
 
 def convert_html_to_markdown(html_content):
     h = html2text.HTML2Text()
@@ -12,7 +16,7 @@ def convert_html_to_markdown(html_content):
     h.body_width = 0
     return h.handle(html_content)
 
-def process_html_files(source_dir, dest_dir):
+def process_html_files(source_dir: Path, dest_dir: Path):
     if not dest_dir.exists():
         dest_dir.mkdir(parents=True)
 
@@ -29,7 +33,29 @@ def process_html_files(source_dir, dest_dir):
             f.write(markdown)
         print(f"✅ Saved {md_path}")
 
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description="Convert HTML files in a directory to Markdown"
+    )
+    parser.add_argument(
+        "--source",
+        type=Path,
+        default=DEFAULT_SOURCE,
+        help="Directory containing HTML files (default: html2markdown)",
+    )
+    parser.add_argument(
+        "--dest",
+        type=Path,
+        default=DEFAULT_DEST,
+        help="Output directory for Markdown files (default: markdown_files)",
+    )
+    return parser.parse_args()
+
+
 if __name__ == "__main__":
-    print(f"📂 Converting HTML files from {SOURCE_DIR} to Markdown in {DEST_DIR}")
-    process_html_files(SOURCE_DIR, DEST_DIR)
+    args = parse_args()
+    print(
+        f"📂 Converting HTML files from {args.source} to Markdown in {args.dest}"
+    )
+    process_html_files(args.source, args.dest)
     print("✅ All conversions done.")
